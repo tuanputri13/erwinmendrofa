@@ -11,7 +11,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-// Komponen SVG Ikon GitHub Kustom (Mencegah error import Lucide)
+// SVG Ikon GitHub Kustom (Solusi aman dari error lucide-react)
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg 
@@ -93,7 +93,6 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1 */}
           <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 backdrop-blur hover:border-cyan-500/50 transition-all group">
             <div className="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <Radio className="w-6 h-6" />
@@ -104,7 +103,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Card 2 */}
           <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 backdrop-blur hover:border-blue-500/50 transition-all group">
             <div className="w-12 h-12 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <GraduationCap className="w-6 h-6" />
@@ -115,7 +113,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Card 3 */}
           <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 backdrop-blur hover:border-indigo-500/50 transition-all group">
             <div className="w-12 h-12 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <Cpu className="w-6 h-6" />
