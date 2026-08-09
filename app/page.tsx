@@ -12,6 +12,7 @@ import {
   Layers,
   Sparkles,
   ArrowDown,
+  ArrowUp,
   ArrowUpRight,
   Menu,
   X,
