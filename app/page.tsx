@@ -15,7 +15,6 @@ import {
   ArrowUpRight,
   Menu,
   X,
-  Github,
   Network,
   Code2,
   CircuitBoard,
@@ -677,7 +676,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:bg-slate-800"
                 >
-                  <Github className="h-4 w-4" />
+                  <GithubIcon className="h-4 w-4" />
                   Lihat GitHub
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
