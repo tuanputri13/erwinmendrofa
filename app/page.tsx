@@ -19,13 +19,31 @@ import {
   X,
 } from "lucide-react";
 
+/* ============================================================
+   CONFIG
+   ============================================================ */
+
+const GITHUB_URL = "https://github.com/tuanputri13";
+
 /*
-|--------------------------------------------------------------------------
-| DATA
-|--------------------------------------------------------------------------
-| Untuk sementara gambar menggunakan Unsplash.
-| Nanti cukup ganti image dengan foto pekerjaan asli Anda.
-|--------------------------------------------------------------------------
+  FOTO PEKERJAAN
+
+  Untuk sementara website menggunakan foto dari Unsplash sebagai
+  fallback.
+
+  Nanti jika foto pekerjaan asli sudah tersedia, cukup masukkan
+  file ke:
+
+  public/images/work/
+
+  dengan nama:
+
+  01-network-vsat.jpg
+  02-software-development.jpg
+  03-electronics-iot.jpg
+  04-technology-education.jpg
+
+  Tidak perlu mengubah struktur halaman.
 */
 
 const workItems = [
@@ -35,7 +53,8 @@ const workItems = [
     title: "Field Network & VSAT Infrastructure",
     description:
       "Dokumentasi pekerjaan lapangan, instalasi, troubleshooting, konfigurasi jaringan, serta aktivitas yang berkaitan dengan konektivitas dan infrastruktur.",
-    image:
+    image: "/images/work/01-network-vsat.jpg",
+    fallback:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85",
     tags: ["VSAT", "Network", "Infrastructure"],
     status: "FIELD WORK",
@@ -46,7 +65,8 @@ const workItems = [
     title: "Web & System Development",
     description:
       "Pengembangan aplikasi dan sistem untuk membantu pekerjaan menjadi lebih terstruktur, terdokumentasi, dan mudah digunakan.",
-    image:
+    image: "/images/work/02-software-development.jpg",
+    fallback:
       "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=85",
     tags: ["Next.js", "React", "TypeScript"],
     status: "DEVELOPMENT",
@@ -57,7 +77,8 @@ const workItems = [
     title: "Electronics, Sensors & IoT",
     description:
       "Eksperimen dan implementasi mikrokontroler, sensor, aktuator, simulasi hardware, serta integrasi perangkat dengan sistem.",
-    image:
+    image: "/images/work/03-electronics-iot.jpg",
+    fallback:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=85",
     tags: ["Arduino", "IoT", "Electronics"],
     status: "EXPERIMENT",
@@ -68,7 +89,8 @@ const workItems = [
     title: "Vocational Technology Education",
     description:
       "Dokumentasi kegiatan pembelajaran, praktik TKJ, pembuatan modul, project siswa, dan penerapan teknologi dalam pendidikan vokasi.",
-    image:
+    image: "/images/work/04-technology-education.jpg",
+    fallback:
       "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=85",
     tags: ["TKJ", "Education", "Mentoring"],
     status: "EDUCATION",
@@ -160,11 +182,9 @@ const processItems = [
   },
 ];
 
-/*
-|--------------------------------------------------------------------------
-| SMALL COMPONENTS
-|--------------------------------------------------------------------------
-*/
+/* ============================================================
+   SMALL COMPONENTS
+   ============================================================ */
 
 function SectionLabel({
   number,
@@ -174,10 +194,16 @@ function SectionLabel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mb-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-400">
-      <span className="text-slate-600">{number}</span>
-      <span className="h-px w-8 bg-cyan-500/40" />
-      <span>{children}</span>
+    <div className="mb-7 flex items-center gap-3">
+      <span className="font-mono text-xs font-bold text-cyan-400">
+        {number}
+      </span>
+
+      <span className="h-px w-8 bg-slate-800" />
+
+      <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-600">
+        {children}
+      </span>
     </div>
   );
 }
@@ -190,27 +216,27 @@ function GitHubMark({ className = "h-5 w-5" }: { className?: string }) {
       className={className}
       aria-hidden="true"
     >
-      <path d="M12 .5C5.65.5.5 5.78.5 12.29c0 5.2 3.44 9.61 8.21 11.17.6.11.82-.27.82-.59v-2.08c-3.34.75-4.04-1.65-4.04-1.65-.55-1.42-1.34-1.8-1.34-1.8-1.09-.77.08-.75.08-.75 1.21.09 1.84 1.27 1.84 1.27 1.07 1.89 2.81 1.34 3.5 1.02.11-.8.42-1.34.76-1.65-2.67-.31-5.47-1.37-5.47-6.09 0-1.35.47-2.45 1.24-3.31-.12-.31-.54-1.57.12-3.27 0 0 1.01-.33 3.3 1.26a11.1 11.1 0 0 1 6 0c2.29-1.59 3.3-1.26 3.3-1.26.66 1.7.24 2.96.12 3.27.77.86 1.24 1.96 1.24 3.31 0 4.73-2.81 5.77-5.49 6.08.43.38.81 1.14.81 2.3v3.41c0 .33.22.71.83.59 4.77-1.56 8.2-5.97 8.2-11.17C23.5 5.78 18.35.5 12 .5Z" />
+      <path d="M12 2C6.477 2 2 6.477 2 12c0 4.419 2.865 8.167 6.839 9.49.5.092.682-.217.682-.483 0-.237-.009-1.026-.014-1.861-2.782.604-3.369-1.184-3.369-1.184-.455-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.607.069-.607 1.004.071 1.532 1.032 1.532 1.032.892 1.529 2.341 1.087 2.91.832.091-.647.349-1.087.635-1.337-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.58 9.58 0 0 1 2.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.917.678 1.849 0 1.335-.012 2.411-.012 2.738 0 .268.18.58.688.482A10.002 10.002 0 0 0 22 12c0-5.523-4.477-10-10-10Z" />
     </svg>
   );
 }
 
-/*
-|--------------------------------------------------------------------------
-| PAGE
-|--------------------------------------------------------------------------
-*/
+/* ============================================================
+   PAGE
+   ============================================================ */
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#020617] text-slate-200">
       {/* ============================================================
           BACKGROUND
-      ============================================================ */}
+          ============================================================ */}
 
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -231,7 +257,7 @@ export default function Home() {
 
       {/* ============================================================
           NAVIGATION
-      ============================================================ */}
+          ============================================================ */}
 
       <header className="sticky top-0 z-50 border-b border-slate-800/70 bg-[#020617]/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-[1700px] items-center justify-between px-5 sm:px-8 lg:px-12">
@@ -320,7 +346,7 @@ export default function Home() {
 
       {/* ============================================================
           HERO
-      ============================================================ */}
+          ============================================================ */}
 
       <section
         id="home"
@@ -368,7 +394,7 @@ export default function Home() {
               </a>
 
               <a
-                href="https://github.com/tuanputri13"
+                href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/50 px-6 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:bg-slate-800"
@@ -522,7 +548,7 @@ export default function Home() {
 
       {/* ============================================================
           WORK / EVIDENCE
-      ============================================================ */}
+          ============================================================ */}
 
       <section
         id="work"
@@ -575,7 +601,15 @@ export default function Home() {
                       <img
                         src={work.image}
                         alt={work.title}
+                        loading="lazy"
                         className="absolute inset-0 h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                        onError={(event) => {
+                          const target = event.currentTarget;
+
+                          if (target.src !== work.fallback) {
+                            target.src = work.fallback;
+                          }
+                        }}
                       />
 
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
@@ -628,7 +662,7 @@ export default function Home() {
 
       {/* ============================================================
           CAPABILITIES
-      ============================================================ */}
+          ============================================================ */}
 
       <section id="peran">
         <div className="mx-auto w-full max-w-[1700px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
@@ -688,7 +722,7 @@ export default function Home() {
 
       {/* ============================================================
           SKILLS
-      ============================================================ */}
+          ============================================================ */}
 
       <section
         id="keahlian"
@@ -754,7 +788,7 @@ export default function Home() {
 
       {/* ============================================================
           PROCESS
-      ============================================================ */}
+          ============================================================ */}
 
       <section id="cara-kerja">
         <div className="mx-auto w-full max-w-[1700px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
@@ -805,7 +839,7 @@ export default function Home() {
 
       {/* ============================================================
           ABOUT
-      ============================================================ */}
+          ============================================================ */}
 
       <section
         id="tentang"
@@ -848,20 +882,16 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-2 pt-2">
-                {[
-                  "Build",
-                  "Learn",
-                  "Troubleshoot",
-                  "Document",
-                  "Share",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-slate-500"
-                  >
-                    {item}
-                  </span>
-                ))}
+                {["Build", "Learn", "Troubleshoot", "Document", "Share"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-slate-500"
+                    >
+                      {item}
+                    </span>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -870,7 +900,7 @@ export default function Home() {
 
       {/* ============================================================
           CONTACT
-      ============================================================ */}
+          ============================================================ */}
 
       <section id="kontak" className="border-t border-slate-800/70">
         <div className="mx-auto w-full max-w-[1700px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
@@ -903,7 +933,7 @@ export default function Home() {
                 </a>
 
                 <a
-                  href="https://github.com/tuanputri13"
+                  href={GITHUB_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-3 rounded-xl border border-slate-700 bg-slate-950/60 px-6 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:bg-slate-900"
@@ -920,7 +950,7 @@ export default function Home() {
 
       {/* ============================================================
           FOOTER
-      ============================================================ */}
+          ============================================================ */}
 
       <footer className="border-t border-slate-900">
         <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-4 px-5 py-8 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
@@ -936,7 +966,7 @@ export default function Home() {
 
           <div className="flex items-center gap-5">
             <a
-              href="https://github.com/tuanputri13"
+              href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-600 transition hover:text-cyan-400"
